@@ -23,7 +23,6 @@ nconf
   //.argv()
   // 2. Environment variables
   .env([
-    'DATA_BACKEND',
     'EgyptMONGODB_URI',
     'PORT'
   ])

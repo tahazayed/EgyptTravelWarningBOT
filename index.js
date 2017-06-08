@@ -17,7 +17,7 @@ const app = express()
 const router = express.Router();
 const config = require('./config');
 const dateFormat = require('dateformat');
-const travelwarningsdb = require('./model-model-mongodb-travelwarnings');
+const travelwarningsDB = require('./model-mongodb-travelwarnings');
 
 
 app.set('port', (process.env.PORT || 5000))
@@ -58,7 +58,7 @@ app.post('/webhook/', function (req, res) {
 				continue
 			}
 			
-			travelwarningsdb.list(1, (err, entities, cursor) => {
+			travelwarningsDB.list(1, (err, entities, cursor) => {
                  if (err) {next(err);return;}
 					 text=entities;
 					 sendGenericMessage(sender, text[0])
