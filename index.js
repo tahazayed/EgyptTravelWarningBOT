@@ -61,7 +61,7 @@ app.post('/webhook/', function (req, res) {
                  if (err) {next(err);return;}
 					 text=entities[0];
 					 let text = JSON.stringify(text)
-					 sendTextMessage(sender, text[0].url)
+					 sendTextMessage(sender, text)
                      });
 			
 			
