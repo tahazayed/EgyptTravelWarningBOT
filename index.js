@@ -56,6 +56,7 @@ app.post('/webhook/', function (req, res) {
 				//sendGenericMessage(sender)
 				continue
 			}
+			entities=''
 			getModel().list(10, req.query.pageToken, req.query.term, (err, entities, cursor,term) => {
                  if (err) {
                      next(err);
