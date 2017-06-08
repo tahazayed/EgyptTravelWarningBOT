@@ -25,7 +25,6 @@ nconf
   .env([
     'DATA_BACKEND',
     'EgyptMONGODB_URI',
-    'MONGO_COLLECTION',
     'PORT'
   ])
   // 3. Config file
@@ -51,7 +50,6 @@ nconf
   });
 */
 checkConfig('EgyptMONGODB_URI');
-checkConfig('MONGO_COLLECTION');
 
 
 function checkConfig (setting) {
