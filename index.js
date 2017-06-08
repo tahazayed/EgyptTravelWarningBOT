@@ -60,9 +60,10 @@ app.post('/webhook/', function (req, res) {
 			getModel().list(10, (err, entities, cursor) => {
                  if (err) {next(err);return;}
 					 text=entities;
+					 sendTextMessage(sender, "Text received, echo: " + text)
                      });
 			
-			sendTextMessage(sender, "Text received, echo: " + text)
+			
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
