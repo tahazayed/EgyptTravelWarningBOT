@@ -61,7 +61,6 @@ function list(limit, cb) {
 			return;
 		}
 		collection.find({})
-			.skip(token)
 			.limit(limit)
 			.sort({
 				'date': -1
@@ -71,103 +70,14 @@ function list(limit, cb) {
 					cb(err);
 					return;
 				}
-				const hasMore =
-					results.length === limit ? token + results.length : false;
-				cb(null, results.map(fromMongo), hasMore, term);
+				cb(null, results.map(fromMongo));
 			});
 		
 	});
 }
 // [END list]
 
-// [START create]
-function create(data, cb) {
-	getCollection((err, collection) => {
-		if (err) {
-			cb(err);
-			return;
-		}
-		collection.insert(data, {
-			w: 1
-		}, (err, result) => {
-			if (err) {
-				cb(err);
-				return;
-			}
-			const item = fromMongo(result.ops);
-			cb(null, item);
-		});
-	});
-}
-// [END create]
-
-function read(id, cb) {
-	getCollection((err, collection) => {
-		if (err) {
-			cb(err);
-			return;
-		}
-		collection.findOne({
-			_id: new ObjectID(id)
-		}, (err, result) => {
-			if (err) {
-				cb(err);
-				return;
-			}
-			if (!result) {
-				cb({
-					code: 404,
-					message: 'Not found'
-				});
-				return;
-			}
-			cb(null, fromMongo(result));
-		});
-	});
-}
-
-// [START update]
-function update(id, data, cb) {
-	getCollection((err, collection) => {
-		if (err) {
-			cb(err);
-			return;
-		}
-		collection.update({
-			_id: new ObjectID(id)
-		}, {
-			'$set': toMongo(data)
-		}, {
-			w: 1
-		},
-			(err) => {
-			if (err) {
-				cb(err);
-				return;
-			}
-			read(id, cb);
-			return;
-		});
-	});
-}
-// [END update]
-
-function _delete(id, cb) {
-	getCollection((err, collection) => {
-		if (err) {
-			cb(err);
-			return;
-		}
-		collection.remove({
-			_id: new ObjectID(id)
-		}, cb);
-	});
-}
 
 module.exports = {
-	create,
-	read,
-	update,
-	delete : _delete,
 	list
 };

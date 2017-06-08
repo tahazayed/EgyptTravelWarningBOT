@@ -57,11 +57,8 @@ app.post('/webhook/', function (req, res) {
 				continue
 			}
 			
-			getModel().list(10, (err, entities, cursor,term) => {
-                 if (err) {
-                     next(err);
-                     return;
-                     }
+			getModel().list(10, (err, entities, cursor) => {
+                 if (err) {next(err);return;}
 					 text=entities;
                      });
 			
