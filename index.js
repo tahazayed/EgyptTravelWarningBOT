@@ -112,7 +112,7 @@ function sendGenericMessage(sender, text) {
 				"template_type": "generic",
 				"elements": [{
 					"title": text.title,
-					"subtitle": dateFormat(text.date, "dddd, mmmm dS, yyyy");,
+					"subtitle": dateFormat(text.date, "dddd, mmmm dS, yyyy"),
 					"image_url": "https://egypttravelwarningbot.herokuapp.com/static/img/red-warning-sign2.jpg",
 					"buttons": [{
 						"type": "web_url",
