@@ -14,6 +14,12 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
+const router = express.Router();
+const config = require('./config');
+
+function getModel() {
+	return require(`./model-${config.get('DATA_BACKEND')}`);
+}
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -50,7 +56,14 @@ app.post('/webhook/', function (req, res) {
 				//sendGenericMessage(sender)
 				continue
 			}
-			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+			getModel().list(10, req.query.pageToken, req.query.term, (err, entities, cursor,term) => {
+                 if (err) {
+                     next(err);
+                     return;
+                     }
+                     });
+			text=entities;
+			sendTextMessage(sender, "Text received, echo: " + text)
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
@@ -135,6 +148,15 @@ function sendGenericMessage(sender) {
 	})
 }
 
+router.use((err, req, res, next) => {
+  // Format error and forward to generic error handler for logging and
+  // responding to the request
+  err.response = {
+    message: err.message,
+    internalCode: err.code
+  };
+  next(err);
+});
 // spin spin sugar
 app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'))
