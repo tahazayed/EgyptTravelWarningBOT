@@ -28,6 +28,8 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // parse application/json
 app.use(bodyParser.json())
+app.set('trust proxy', true);
+app.use('/static', express.static('public'))
 
 // index
 app.get('/', function (req, res) {
