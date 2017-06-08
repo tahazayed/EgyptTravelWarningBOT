@@ -56,14 +56,15 @@ app.post('/webhook/', function (req, res) {
 				//sendGenericMessage(sender)
 				continue
 			}
-			entities=''
-			getModel().list(10, req.query.pageToken, req.query.term, (err, entities, cursor,term) => {
+			
+			getModel().list(10, (err, entities, cursor,term) => {
                  if (err) {
                      next(err);
                      return;
                      }
+					 text=entities;
                      });
-			text=entities;
+			
 			sendTextMessage(sender, "Text received, echo: " + text)
 		}
 		if (event.postback) {

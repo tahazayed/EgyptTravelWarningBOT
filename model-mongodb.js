@@ -53,12 +53,8 @@ function getCollection(cb) {
 }
 
 // [START list]
-function list(limit, token, cb) {
-	token = token ? parseInt(token, 10) : 0;
-	if (isNaN(token)) {
-		cb(new Error('invalid token'));
-		return;
-	}
+function list(limit, cb) {
+
 	getCollection((err, collection) => {
 		if (err) {
 			cb(err);
