@@ -15,7 +15,7 @@
 
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
-const config = require('config');
+const config = require('./config');
 
 let collection;
 

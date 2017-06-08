@@ -20,6 +20,8 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "request": "^2.81.0",
-	"nconf": "^0.8.4"
+    "mongodb": "^2.2.5",
+    "nconf": "^0.8.4",
+    "prompt": "^1.0.0"
   }
 }
