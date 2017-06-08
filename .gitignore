@@ -4,6 +4,8 @@ node_modules
 .idea
 commit_git.bat
 deploy.bat
+npm-debug.log
+
 
 
 
