@@ -114,7 +114,7 @@ function sendGenericMessage(sender, text) {
 					"buttons": [{
 						"type": "web_url",
 						"url": text.url,
-						"title": text.title
+						"title": "View"
 					}]
 				}]
 			}
