@@ -1,0 +1,24 @@
+{
+  "name": "egypttravelwarningbot",
+  "version": "1.0.0",
+  "description": "The Dept of State has issued a Travel Warning to all US citizens contemplating a trip to Egypt.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Egypt",
+    "saftery",
+    "Security",
+    "messages",
+    "Travel",
+    "warning"
+  ],
+  "author": "tahazayed@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "request": "^2.81.0"
+  }
+}
