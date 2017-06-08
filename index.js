@@ -57,10 +57,10 @@ app.post('/webhook/', function (req, res) {
 				continue
 			}
 			
-			getModel().list(10, (err, entities, cursor) => {
+			getModel().list(1, (err, entities, cursor) => {
                  if (err) {next(err);return;}
 					 text=entities;
-					 sendTextMessage(sender, "Text received, echo: " + text)
+					 sendTextMessage(sender, text.URL)
                      });
 			
 			
