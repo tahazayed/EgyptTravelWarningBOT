@@ -59,7 +59,8 @@ app.post('/webhook/', function (req, res) {
 			
 			getModel().list(1, (err, entities, cursor) => {
                  if (err) {next(err);return;}
-					 text=entities;
+					 text=entities[0];
+					 let text = JSON.stringify(text)
 					 sendTextMessage(sender, text[0].url)
                      });
 			
