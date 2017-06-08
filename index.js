@@ -108,7 +108,7 @@ function sendGenericMessage(sender, text) {
 				"elements": [{
 					"title": text.title,
 					"subtitle": text.date,
-					"image_url": "https://eg.usembassy.gov/wp-content/themes/cms3/dist/images/red_travel_warning_82x82px.png",
+					"image_url": "https://egypttravelwarningbot.herokuapp.com/static/img/red-warning-sign2.jpg",
 					"buttons": [{
 						"type": "web_url",
 						"url": text.url,
