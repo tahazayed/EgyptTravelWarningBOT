@@ -108,25 +108,12 @@ function sendGenericMessage(sender, text) {
 				"elements": [{
 					"title": text.title,
 					"subtitle": text.date,
-					"image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+					"image_url": "https://eg.usembassy.gov/wp-content/themes/cms3/dist/images/red_travel_warning_82x82px.png",
 					"buttons": [{
 						"type": "web_url",
 						"url": text.url,
-						"title": "web url"
-					}, {
-						"type": "postback",
-						"title": "Postback",
-						"payload": "Payload for first element in a generic bubble",
-					}],
-				}, {
-					"title": "Second card",
-					"subtitle": "Element #2 of an hscroll",
-					"image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-					"buttons": [{
-						"type": "postback",
-						"title": "Postback",
-						"payload": "Payload for second element in a generic bubble",
-					}],
+						"title": text.title
+					}]
 				}]
 			}
 		}
