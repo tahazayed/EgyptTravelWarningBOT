@@ -53,7 +53,7 @@ function getCollection(cb) {
 }
 
 // [START list]
-function list(limit, token, term, cb) {
+function list(limit, token, cb) {
 	token = token ? parseInt(token, 10) : 0;
 	if (isNaN(token)) {
 		cb(new Error('invalid token'));
@@ -64,9 +64,7 @@ function list(limit, token, term, cb) {
 			cb(err);
 			return;
 		}
-		if (!term) {
-
-			collection.find({})
+		collection.find({})
 			.skip(token)
 			.limit(limit)
 			.sort({
@@ -81,59 +79,7 @@ function list(limit, token, term, cb) {
 					results.length === limit ? token + results.length : false;
 				cb(null, results.map(fromMongo), hasMore, term);
 			});
-		} else {
-			term = term.replace('%20', ' ');
-			/*
-			collection.find({
-				$or: [{
-						"n": new RegExp(term, 'i')
-					}, {
-						"tags": new RegExp(term, 'i')
-					}
-					,
-					{
-						"ingrd.n": new RegExp(term, 'i')
-					}, {
-						"instrct.txt": new RegExp(term, 'i')
-					}
-				]
-			})
-			.skip(token)
-			.limit(limit)
-			.sort({
-				'likes': -1
-			})
-			.toArray((err, results) => {
-				if (err) {
-					cb(err);
-					return;
-				}
-				const hasMore =
-					results.length === limit ? token + results.length : false;
-				cb(null, results.map(fromMongo), hasMore, term);
-			});
-			*/
-
-
-			collection.find({ 
-			$text: { $search: term}},{ score: { $meta: "textScore" } }).sort( { score: { $meta: "textScore" } }
-			)
-			.skip(token)
-			.limit(limit)
-			.sort({
-				'likes': -1
-			})
-			.toArray((err, results) => {
-				if (err) {
-					cb(err);
-					return;
-				}
-				const hasMore =
-					results.length === limit ? token + results.length : false;
-				cb(null, results.map(fromMongo), hasMore, term);
-			});
-
-		}
+		
 	});
 }
 // [END list]
