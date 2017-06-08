@@ -59,9 +59,8 @@ app.post('/webhook/', function (req, res) {
 			
 			getModel().list(1, (err, entities, cursor) => {
                  if (err) {next(err);return;}
-					 text=entities[0];
-					 let text = JSON.stringify(text)
-					 sendTextMessage(sender, text)
+					 text=entities;
+					 sendGenericMessage(sender, text[0])
                      });
 			
 			
@@ -100,19 +99,19 @@ function sendTextMessage(sender, text) {
 	})
 }
 
-function sendGenericMessage(sender) {
+function sendGenericMessage(sender, text) {
 	let messageData = {
 		"attachment": {
 			"type": "template",
 			"payload": {
 				"template_type": "generic",
 				"elements": [{
-					"title": "First card",
-					"subtitle": "Element #1 of an hscroll",
+					"title": text.title,
+					"subtitle": text.date,
 					"image_url": "http://messengerdemo.parseapp.com/img/rift.png",
 					"buttons": [{
 						"type": "web_url",
-						"url": "https://www.messenger.com",
+						"url": text.url,
 						"title": "web url"
 					}, {
 						"type": "postback",
