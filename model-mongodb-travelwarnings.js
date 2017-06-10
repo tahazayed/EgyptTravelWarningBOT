@@ -132,7 +132,7 @@ function createUser(data, cb) {
 			cb(err);
 			return;
 		    }
-	       cb(null, object);
+	       cb(null, fromMongo(object));
         });
 	});
 }
@@ -148,7 +148,7 @@ function createUserNotification(data, cb) {
 			cb(err);
 			return;
 		    }
-	       cb(null, object);
+	       cb(null, fromMongo(object));
         });
 
 
