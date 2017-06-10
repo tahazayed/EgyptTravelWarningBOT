@@ -58,10 +58,11 @@ app.post('/webhook/', function (req, res) {
 					 travelwarningId = text[0].id
 					 sendGenericMessage(sender, text[0])
 					 
-					 travelwarningsDB.createUser({user:sender,last_updated: new Date(Date.now())}, (err, item) => {
+					 travelwarningsDB.createUser({user:sender,last_updated: new Date(Date.now())}, (err, user) => {
                         if (err) {next(err);return;}
-					    console.log(item)
-						travelwarningsDB.createUserNotification({user:item.id,last_updated: new Date(Date.now()),travelwarningId:travelwarningId}, (err, item) => {
+					    console.log(user);
+						let userId=user.id;
+						travelwarningsDB.createUserNotification({user:userId,last_updated: new Date(Date.now()),travelwarningId:travelwarningId}, (err, item) => {
                            if (err) {next(err);return;}
 					       console.log(item)
                            });
