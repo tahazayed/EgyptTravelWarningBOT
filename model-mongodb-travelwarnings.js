@@ -139,7 +139,7 @@ function createUserNotification(data, cb) {
 			cb(err);
 			return;
 		}
-		collection.update({user: data.user, data.travelwarningId}, data, {upsert: true});
+		collection.update({user: data.user, travelwarningId:data.travelwarningId}, data, {upsert: true});
 	    cb(null, data);
 
 	});
