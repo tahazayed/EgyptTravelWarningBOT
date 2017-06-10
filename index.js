@@ -51,10 +51,11 @@ app.post('/webhook/', function (req, res) {
 				//sendGenericMessage(sender)
 				continue
 			}
-			
+			let travelwarningId;
 			travelwarningsDB.list(1, (err, entities, cursor) => {
                  if (err) {next(err);return;}
 					 text=entities;
+					 travelwarningId = text[0].id
 					 sendGenericMessage(sender, text[0])
                      });
 
@@ -62,7 +63,10 @@ app.post('/webhook/', function (req, res) {
                  if (err) {next(err);return;}
 					 console.log(item)
                      });
-			
+			travelwarningsDB.createUserNotification({user:sender,last_updated: new Date(Date.now()),travelwarningId:travelwarningId}, (err, item) => {
+                 if (err) {next(err);return;}
+					 console.log(item)
+                     });
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)

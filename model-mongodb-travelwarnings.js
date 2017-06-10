@@ -19,6 +19,7 @@ const config = require('./config');
 
 let collection;
 let usersCollection;
+let userNotificationCollection;
 
 // [START translate]
 function fromMongo(item) {
@@ -77,6 +78,23 @@ function getUsersCollection(cb) {
 	});
 }
 
+function getUserNotification(cb) {
+
+	if (userNotificationCollection) {
+		setImmediate(() => {
+			cb(null, userNotificationCollection);
+		});
+		return;
+	}
+	MongoClient.connect(config.get('EgyptMONGODB_URI'), (err, db) => {
+		if (err) {
+			cb(err);
+			return;
+		}
+		userNotificationCollection = db.collection('userNotifications');
+		cb(null, userNotificationCollection);
+	});
+}
 // [START list]
 function list(limit, cb) {
 
@@ -110,6 +128,18 @@ function createUser(data, cb) {
 			return;
 		}
 		collection.update({user: data.user}, data, {upsert: true});
+	    cb(null, data);
+
+	});
+}
+// [END create]
+function createUserNotification(data, cb) {
+	getUserNotification((err, collection) => {
+		if (err) {
+			cb(err);
+			return;
+		}
+		collection.update({user: data.user, data.travelwarningId}, data, {upsert: true});
 	    cb(null, data);
 
 	});
