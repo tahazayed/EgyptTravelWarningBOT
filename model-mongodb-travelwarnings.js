@@ -132,6 +132,7 @@ function createUser(data, cb) {
 			cb(err);
 			return;
 		    }
+			console.log(object);
 	       cb(null, fromMongo(object.ops));
         });
 	});
