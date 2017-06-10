@@ -36,7 +36,8 @@ app.get('/', function (req, res) {
 	res.send('hello world i am a secret bot')
 })
 // index
-app.get('/terms', function (req, res) {
+
+app.get('/terms/', function (req, res) {
 	res.send('The Dept of State has issued a Travel Warning to all US citizens contemplating a trip to Egypt., and This is a bot for alerting.')
 })
 
