@@ -109,7 +109,15 @@ function createUser(data, cb) {
 			cb(err);
 			return;
 		}
-		collection.findAndModify({user: data.user}, data, {$set: {user: data.user}}, {upsert: true, new: true}, cb);
+		collection.update({user: data.user}, data, {upsert: true}, function(err, nAffected, raw) {
+          	if (err) {
+				cb(err);
+				return;
+			}
+
+          const item = fromMongo(result.ops);
+			cb(null, item);
+           });
 		/*
 		collection.insert(data, {
 			w: 1
