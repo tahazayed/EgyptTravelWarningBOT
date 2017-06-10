@@ -127,9 +127,13 @@ function createUser(data, cb) {
 			cb(err);
 			return;
 		}
-		collection.update({user: data.user}, data, {upsert: true});
-	    cb(null, data);
-
+		collection.update({user: data.user}, data, {upsert: true},function(err, object) {
+           if (err) {
+			cb(err);
+			return;
+		    }
+	       cb(null, object);
+        });
 	});
 }
 // [END create]
@@ -139,8 +143,14 @@ function createUserNotification(data, cb) {
 			cb(err);
 			return;
 		}
-		collection.update({user: data.user, travelwarningId:data.travelwarningId}, data, {upsert: true});
-	    cb(null, data);
+		collection.update({user: data.user, travelwarningId:data.travelwarningId}, data, {upsert: true},function(err, object) {
+           if (err) {
+			cb(err);
+			return;
+		    }
+	       cb(null, object);
+        });
+
 
 	});
 }
