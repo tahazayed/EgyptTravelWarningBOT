@@ -8,7 +8,7 @@ const router = express.Router();
 const config = require('./config');
 const dateFormat = require('dateformat');
 const travelwarningsDB = require('./model-mongodb-travelwarnings');
-//const usersDB = require('./model-mongodb-users');
+const usersDB = require('./model-mongodb-users');
 
 
 app.set('port', (process.env.PORT || 5000))
