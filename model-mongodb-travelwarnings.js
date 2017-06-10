@@ -147,5 +147,6 @@ function createUserNotification(data, cb) {
 // [END create]
 module.exports = {
 	list,
-	createUser
+	createUser,
+	createUserNotification
 };
