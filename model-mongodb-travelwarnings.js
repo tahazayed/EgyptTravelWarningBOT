@@ -127,14 +127,7 @@ function createUser(data, cb) {
 			cb(err);
 			return;
 		}
-		collection.update({user: data.user}, data, {upsert: true},function(err, affected, object) {
-           if (err) {
-			cb(err);
-			return;
-		    }
-			console.log(object);
-	       cb(null, fromMongo(object.ops));
-        });
+		collection.update({user: data.user}, data, {upsert: true});
 	});
 }
 // [END create]
@@ -144,14 +137,7 @@ function createUserNotification(data, cb) {
 			cb(err);
 			return;
 		}
-		collection.update({user: data.user, travelwarningId:data.travelwarningId}, data, {upsert: true},function(err, affected, object) {
-           if (err) {
-			cb(err);
-			return;
-		    }
-			console.log(object);
-	       cb(null, fromMongo(object.ops));
-        });
+		collection.update({user: data.user, travelwarningId:data.travelwarningId}, data, {upsert: true});
 
 
 	});

@@ -61,8 +61,7 @@ app.post('/webhook/', function (req, res) {
 					 travelwarningsDB.createUser({user:sender,last_updated: new Date(Date.now())}, (err, user) => {
                         if (err) {next(err);return;}
 					    console.log(user);
-						let userId=user.id;
-						travelwarningsDB.createUserNotification({user:userId,last_updated: new Date(Date.now()),travelwarningId:travelwarningId}, (err, item) => {
+						travelwarningsDB.createUserNotification({user:sender,last_updated: new Date(Date.now()),travelwarningId:travelwarningId}, (err, item) => {
                            if (err) {next(err);return;}
 					       console.log(item)
                            });
