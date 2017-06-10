@@ -18,6 +18,7 @@ const ObjectID = require('mongodb').ObjectID;
 const config = require('./config');
 
 let collection;
+let usersCollection;
 
 // [START translate]
 function fromMongo(item) {
@@ -42,6 +43,12 @@ function getCollection(cb) {
 		});
 		return;
 	}
+	if (usersCollection) {
+		setImmediate(() => {
+			cb(null, usersCollection);
+		});
+		return;
+	}
 	MongoClient.connect(config.get('EgyptMONGODB_URI'), (err, db) => {
 		if (err) {
 			cb(err);
@@ -49,6 +56,24 @@ function getCollection(cb) {
 		}
 		collection = db.collection('travelwarnings');
 		cb(null, collection);
+	});
+}
+
+function getUsersCollection(cb) {
+
+	if (usersCollection) {
+		setImmediate(() => {
+			cb(null, usersCollection);
+		});
+		return;
+	}
+	MongoClient.connect(config.get('EgyptMONGODB_URI'), (err, db) => {
+		if (err) {
+			cb(err);
+			return;
+		}
+		usersCollection = db.collection('users');
+		cb(null, usersCollection);
 	});
 }
 
@@ -77,7 +102,27 @@ function list(limit, cb) {
 }
 // [END list]
 
-
+// [START create]
+function createUser(data, cb) {
+	getUsersCollection((err, collection) => {
+		if (err) {
+			cb(err);
+			return;
+		}
+		collection.insert(data, {
+			w: 1
+		}, (err, result) => {
+			if (err) {
+				cb(err);
+				return;
+			}
+			const item = fromMongo(result.ops);
+			cb(null, item);
+		});
+	});
+}
+// [END create]
 module.exports = {
-	list
+	list,
+	createUser
 };
