@@ -109,6 +109,8 @@ function createUser(data, cb) {
 			cb(err);
 			return;
 		}
+		collection.findAndModify({user: user}, {}, {$set: {user: user}}, {upsert: true, new: true}, cb);
+		/*
 		collection.insert(data, {
 			w: 1
 		}, (err, result) => {
@@ -119,6 +121,7 @@ function createUser(data, cb) {
 			const item = fromMongo(result.ops);
 			cb(null, item);
 		});
+		*/
 	});
 }
 // [END create]
