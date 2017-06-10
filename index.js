@@ -18,6 +18,7 @@ const router = express.Router();
 const config = require('./config');
 const dateFormat = require('dateformat');
 const travelwarningsDB = require('./model-mongodb-travelwarnings');
+const usersDB = require('./model-mongodb-users');
 
 
 app.set('port', (process.env.PORT || 5000))
@@ -33,6 +34,10 @@ app.use('/static', express.static('public'))
 // index
 app.get('/', function (req, res) {
 	res.send('hello world i am a secret bot')
+})
+// index
+app.get('/terms', function (req, res) {
+	res.send('The Dept of State has issued a Travel Warning to all US citizens contemplating a trip to Egypt., and This is a bot for alerting.')
 })
 
 // for facebook verification
