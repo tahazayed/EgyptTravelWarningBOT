@@ -127,7 +127,7 @@ function createUser(data, cb) {
 			cb(err);
 			return;
 		}
-		collection.update({user: data.user}, data, {upsert: true},function(err, object) {
+		collection.update({user: data.user}, data, {upsert: true},function(err, affected, object) {
            if (err) {
 			cb(err);
 			return;
@@ -143,7 +143,7 @@ function createUserNotification(data, cb) {
 			cb(err);
 			return;
 		}
-		collection.update({user: data.user, travelwarningId:data.travelwarningId}, data, {upsert: true},function(err, object) {
+		collection.update({user: data.user, travelwarningId:data.travelwarningId}, data, {upsert: true},function(err, affected, object) {
            if (err) {
 			cb(err);
 			return;
