@@ -57,16 +57,20 @@ app.post('/webhook/', function (req, res) {
 					 text=entities;
 					 travelwarningId = text[0].id
 					 sendGenericMessage(sender, text[0])
-                     });
+					 
+					 travelwarningsDB.createUser({user:sender,last_updated: new Date(Date.now())}, (err, item) => {
+                        if (err) {next(err);return;}
+					    console.log(item)
+                        });
+						
+					 travelwarningsDB.createUserNotification({user:sender,last_updated: new Date(Date.now()),travelwarningId:travelwarningId}, (err, item) => {
+                        if (err) {next(err);return;}
+					    console.log(item)
+                        });	
+                    });
 
-			travelwarningsDB.createUser({user:sender,last_updated: new Date(Date.now())}, (err, item) => {
-                 if (err) {next(err);return;}
-					 console.log(item)
-                     });
-			travelwarningsDB.createUserNotification({user:sender,last_updated: new Date(Date.now()),travelwarningId:travelwarningId}, (err, item) => {
-                 if (err) {next(err);return;}
-					 console.log(item)
-                     });
+			
+
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
