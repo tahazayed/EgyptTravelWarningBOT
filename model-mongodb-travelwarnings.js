@@ -109,27 +109,9 @@ function createUser(data, cb) {
 			cb(err);
 			return;
 		}
-		collection.update({user: data.user}, data, {upsert: true}, function(err, nAffected, raw) {
-          	if (err) {
-				cb(err);
-				return;
-			}
+		collection.update({user: data.user}, data, {upsert: true});
+	    cb(null, data);
 
-          const item = fromMongo(result.ops);
-			cb(null, item);
-           });
-		/*
-		collection.insert(data, {
-			w: 1
-		}, (err, result) => {
-			if (err) {
-				cb(err);
-				return;
-			}
-			const item = fromMongo(result.ops);
-			cb(null, item);
-		});
-		*/
 	});
 }
 // [END create]
