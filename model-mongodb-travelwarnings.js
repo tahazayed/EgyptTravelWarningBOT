@@ -109,7 +109,7 @@ function createUser(data, cb) {
 			cb(err);
 			return;
 		}
-		collection.findAndModify({user: user}, data, {$set: {user: user}}, {upsert: true, new: true}, cb);
+		collection.findAndModify({user: data.user}, data, {$set: {user: data.user}}, {upsert: true, new: true}, cb);
 		/*
 		collection.insert(data, {
 			w: 1
