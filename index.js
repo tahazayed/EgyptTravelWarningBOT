@@ -57,7 +57,7 @@ app.post('/webhook/', function (req, res) {
 					 text=entities;
 					 sendGenericMessage(sender, text[0])
                      });
-			travelwarningsDB.createUser({user:sender}, (err, item) => {
+			travelwarningsDB.createUser({user:sender,last_updated: Date.Now()}, (err, item) => {
                  if (err) {next(err);return;}
 					 console.log(item)
                      });
