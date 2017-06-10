@@ -61,12 +61,12 @@ app.post('/webhook/', function (req, res) {
 					 travelwarningsDB.createUser({user:sender,last_updated: new Date(Date.now())}, (err, item) => {
                         if (err) {next(err);return;}
 					    console.log(item)
+						travelwarningsDB.createUserNotification({user:item.id,last_updated: new Date(Date.now()),travelwarningId:travelwarningId}, (err, item) => {
+                           if (err) {next(err);return;}
+					       console.log(item)
+                           });
                         });
-						
-					 travelwarningsDB.createUserNotification({user:sender,last_updated: new Date(Date.now()),travelwarningId:travelwarningId}, (err, item) => {
-                        if (err) {next(err);return;}
-					    console.log(item)
-                        });	
+	
                     });
 
 			
