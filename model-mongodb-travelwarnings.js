@@ -148,6 +148,7 @@ function createUserNotification(data, cb) {
 			cb(err);
 			return;
 		    }
+			console.log(object);
 	       cb(null, fromMongo(object.ops));
         });
 
